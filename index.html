@@ -27,12 +27,12 @@
 :root[data-theme="dark"]{--bg:#14122a;--surface:#1c1938;--ink:#efecff;--muted:#b0abd3;--line:#38335f;--accent:#a99bff;--accent-ink:#14122a}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
+body{margin:0;padding-top:61px;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .wrap{max-width:820px;margin:0 auto;padding:0 24px}
 
-header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top{position:fixed;top:0;left:0;right:0;width:100%;z-index:100;background:var(--bg);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
 .brand{font:800 1.1rem var(--display);text-decoration:none}
 nav{display:flex;align-items:center;gap:20px;font-size:.95rem}
@@ -81,7 +81,8 @@ dl.skills dd{margin:0}
 .contact-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
 /* ---- motion ---- */
-html,body{overflow-x:hidden;max-width:100%}
+html{overflow-x:clip;max-width:100%}
+body{max-width:100%}
 .prog{position:fixed;top:0;left:0;width:100%;height:4px;background:var(--accent);transform:scaleX(0);transform-origin:left;z-index:10}
 .panel{transition:transform .2s ease-out,box-shadow .2s ease-out;box-shadow:var(--sx,10px) var(--sy,10px) 0 var(--accent);animation:panelIn .8s cubic-bezier(.2,.9,.3,1.15) backwards}
 @keyframes panelIn{from{transform:translateY(40px) rotate(-2deg);box-shadow:0 0 0 var(--accent);opacity:0}}
@@ -118,6 +119,20 @@ html,body{overflow-x:hidden;max-width:100%}
   .work-item.rv>*{clip-path:none;opacity:0;transition:opacity .6s}
   .work-item.rv.in>*{opacity:1}
   .work-item:hover{padding-left:20px}
+}
+/* Mobile safety net: content must never depend on scroll-reveal animations. */
+@media (max-width:620px){
+  .rv{
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:none !important;
+  }
+  .work-item.rv > *{
+    clip-path:none !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    transition:none !important;
+  }
 }
 /* safety net: if a browser never plays the entrance animation, show everything anyway */
 .settled .panel,.settled .caption,.settled .ch,.settled .panel p.lead,.settled .rotline,.settled .btns{animation:none!important;opacity:1}
