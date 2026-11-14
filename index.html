@@ -121,17 +121,21 @@ body{max-width:100%}
   .work-item:hover{padding-left:20px}
 }
 /* Mobile safety net: content must never depend on scroll-reveal animations. */
-@media (max-width:620px){
-  .rv{
-    opacity:1 !important;
-    visibility:visible !important;
-    transform:none !important;
+@media (max-width: 620px) {
+  .hero {
+    width: 100%;
+    overflow: visible;
   }
-  .work-item.rv > *{
-    clip-path:none !important;
-    opacity:1 !important;
-    visibility:visible !important;
-    transition:none !important;
+
+  .hero .panel {
+    width: 100%;
+    max-width: 100%;
+    padding: 44px 20px 28px;
+    animation: panelIn .8s cubic-bezier(.2,.9,.3,1.15) backwards;
+  }
+
+  .hero .panel h1 {
+    font-size: clamp(2rem, 9vw, 3rem);
   }
 }
 /* safety net: if a browser never plays the entrance animation, show everything anyway */
