@@ -105,17 +105,18 @@ html,body{overflow-x:hidden;max-width:100%}
 @keyframes scroll{to{transform:translateX(-50%)}}
 .rv{opacity:0;transform:translateX(-18px);transition:opacity .6s ease-out,transform .6s ease-out}
 .rv.in{opacity:1;transform:none}
-.work-item.rv{opacity:1;transform:none;clip-path:inset(0 100% 0 0);transition:clip-path .9s cubic-bezier(.7,0,.2,1)}
-.work-item.rv.in{clip-path:inset(0 0 0 0)}
-.work-item{transition:padding-left .25s ease,clip-path .9s cubic-bezier(.7,0,.2,1)}
+.work-item.rv{opacity:1;transform:none}
+.work-item.rv>*{clip-path:inset(0 100% 0 0);transition:clip-path .9s cubic-bezier(.7,0,.2,1)}
+.work-item.rv.in>*{clip-path:inset(0 0 0 0)}
+.work-item{transition:padding-left .25s ease}
 .work-item:hover{padding-left:32px}
 @keyframes fadeOnly{from{opacity:0}}
 @media (prefers-reduced-motion:reduce){
   .panel,.caption,.ch,.panel p.lead,.rotline,.btns{animation-name:fadeOnly}
   .marq-track{animation:none}
   .rv{transform:none}
-  .work-item.rv{clip-path:none;opacity:0}
-  .work-item.rv.in{opacity:1}
+  .work-item.rv>*{clip-path:none;opacity:0;transition:opacity .6s}
+  .work-item.rv.in>*{opacity:1}
   .work-item:hover{padding-left:20px}
 }
 /* safety net: if a browser never plays the entrance animation, show everything anyway */
